@@ -1,3 +1,3 @@
-export interface FilterError extends Error {
+export class FilterError extends Error {
     filterType: string;
 }
