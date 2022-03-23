@@ -9,5 +9,6 @@ export interface RatingResponse extends Response {
 
 export enum RatingOperations {
 	ADD,
-	UPDATE
+	UPDATE,
+	REMOVE
 }
