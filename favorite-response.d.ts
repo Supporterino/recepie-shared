@@ -1,6 +1,6 @@
 import { Response } from "./response";
 
-export interface FavoriteModificationResponse extends Response {
+export interface FavoriteResponse extends Response {
     success: boolean;
 	method: string;
 }
