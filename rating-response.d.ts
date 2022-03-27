@@ -1,3 +1,4 @@
+import { RatingOperations } from "./rating-methods";
 import { Response } from "./response";
 
 export interface RatingResponse extends Response {
@@ -5,10 +6,4 @@ export interface RatingResponse extends Response {
 	method: RatingOperations;
 	recipeID: string;
 	userID: string;
-}
-
-export enum RatingOperations {
-	ADD,
-	UPDATE,
-	REMOVE
 }
