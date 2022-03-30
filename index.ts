@@ -1,4 +1,4 @@
-export * from './authToken'
+export * from './auth'
 export * from './creation-and-update-response'
 export * from './database-error'
 export * from './favorite-response'
