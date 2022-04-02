@@ -1,5 +1,5 @@
 import { Response } from "./response";
 
-export interface CreationAndUpdateResponse extends Response {
+export interface CreationResponse extends Response {
     recipeId: string;
 }
