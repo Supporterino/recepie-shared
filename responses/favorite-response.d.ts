@@ -1,4 +1,4 @@
-import { Response } from "./response";
+import { Response } from "..";
 
 export interface FavoriteResponse extends Response {
     success: boolean;

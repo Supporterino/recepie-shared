@@ -1,5 +1,4 @@
-import { RatingOperations } from "./rating-methods";
-import { Response } from "./response";
+import { RatingOperations, Response } from "..";
 
 export interface RatingResponse extends Response {
     success: boolean;

@@ -1,4 +1,4 @@
-import { Units } from "./units";
+import { Units } from "..";
 
 export interface Ingredient {
 	name: string;
