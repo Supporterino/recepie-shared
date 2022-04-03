@@ -1,14 +1,14 @@
 import { Ingredient } from "..";
 
 export interface Recipe {
-	id?: string;
+	id: string;
 	name: string;
 	description: string;
 	ingredients: Ingredient[];
 	steps: string[];
-	rating?: number | string;
+	rating: number;
 	tags: string[];
 	owner: string;
-	creationTimestamp?: Date;
-	updateTimestamp?: Date;
+	creationTimestamp: Date;
+	updateTimestamp: Date;
 }
