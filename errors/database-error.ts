@@ -1,3 +1,7 @@
-export interface DatabaseError extends Error {
-    database: string;
+import { BaseError } from "..";
+
+export class DatabaseError extends BaseError {
+	constructor(message: string, code: number, public database: string) {
+		super(message, code)
+	}
 }

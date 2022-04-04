@@ -1,3 +1,7 @@
-export class FilterError extends Error {
-    filterType!: string;
+import { BaseError } from "..";
+
+export class FilterError extends BaseError {
+	constructor(message: string, code: number, public filterType: string) {
+		super(message, code)
+	}
 }
