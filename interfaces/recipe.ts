@@ -13,4 +13,5 @@ export interface Recipe {
 	creationTimestamp: Date;
 	updateTimestamp: Date;
 	isFavorite: boolean;
+	myRating: number;
 }
