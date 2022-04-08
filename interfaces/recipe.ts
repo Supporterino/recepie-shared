@@ -11,4 +11,5 @@ export interface Recipe {
 	owner: string;
 	creationTimestamp: Date;
 	updateTimestamp: Date;
+	isFavorite: boolean;
 }
