@@ -1,4 +1,4 @@
-import { Ingredient } from "..";
+import { Ingredient, User } from "..";
 import { RatingInfo } from "./ratingInfo";
 
 export interface Recipe {
@@ -9,7 +9,7 @@ export interface Recipe {
 	steps: string[];
 	rating: RatingInfo;
 	tags: string[];
-	owner: string;
+	owner: User;
 	creationTimestamp: Date;
 	updateTimestamp: Date;
 	isFavorite: boolean;
