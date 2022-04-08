@@ -1,4 +1,5 @@
 import { Ingredient } from "..";
+import { RatingInfo } from "./ratingInfo";
 
 export interface Recipe {
 	id: string;
@@ -6,7 +7,7 @@ export interface Recipe {
 	description: string;
 	ingredients: Ingredient[];
 	steps: string[];
-	rating: number;
+	rating: RatingInfo;
 	tags: string[];
 	owner: string;
 	creationTimestamp: Date;
