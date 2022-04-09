@@ -14,4 +14,5 @@ export interface Recipe {
 	updateTimestamp: Date;
 	isFavorite: boolean;
 	myRating: number;
+	isCookList: boolean;
 }
