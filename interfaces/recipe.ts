@@ -10,6 +10,7 @@ export interface Recipe {
 	rating: RatingInfo;
 	tags: string[];
 	owner: User;
+	picture: string;
 	creationTimestamp: Date;
 	updateTimestamp: Date;
 	isFavorite: boolean;
