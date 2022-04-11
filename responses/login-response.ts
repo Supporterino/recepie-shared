@@ -1,6 +1,7 @@
 import { Response } from "..";
 
 export interface LoginResponse extends Response {
-	token: string;
+	jwtToken: string;
+	refreshToken: string;
 	userID: string;
 }
