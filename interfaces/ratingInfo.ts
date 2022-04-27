@@ -1,4 +1,4 @@
 export interface RatingInfo {
-	avgRating: number,
-	numOfRatings: number
+	avgRating: number;
+	numOfRatings: number;
 }

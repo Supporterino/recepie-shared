@@ -5,5 +5,5 @@ export interface User {
     username: string;
 	joinedAt: Date;
 	avatar: string;
-	role: Role
+	role: Role;
 }
