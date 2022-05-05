@@ -1,11 +1,12 @@
-import { Ingredient, User } from "..";
+import { User } from "..";
+import { Ingredients } from "./ingredients";
 import { RatingInfo } from "./ratingInfo";
 
 export interface Recipe {
 	id: string;
 	name: string;
 	description: string;
-	ingredients: Ingredient[];
+	ingredients: Ingredients;
 	steps: string[];
 	rating: RatingInfo;
 	tags: string[];

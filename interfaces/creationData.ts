@@ -1,9 +1,9 @@
-import { Ingredient } from "..";
+import { Ingredients } from "./ingredients";
 
 export interface CreationData {
 	name: string;
 	description: string;
-	ingredients: Ingredient[];
+	ingredients: Ingredients;
 	steps: string[];
 	tags: string[];
 }

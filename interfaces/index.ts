@@ -6,3 +6,4 @@ export * from "./user";
 export * from "./creationData";
 export * from "./updateData";
 export * from "./ratingInfo";
+export * from './ingredients';

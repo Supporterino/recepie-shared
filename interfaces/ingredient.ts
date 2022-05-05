@@ -1,7 +1,7 @@
-import { Units } from "..";
+import { AllMeasuresUnits } from "../enums";
 
 export interface Ingredient {
 	name: string;
 	amount: number;
-	unit: Units;
+	unit: AllMeasuresUnits;
 }
