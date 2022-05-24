@@ -6,4 +6,5 @@ export interface User {
 	joinedAt: Date;
 	avatar: string;
 	role: Role;
+	verified: boolean;
 }
