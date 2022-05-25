@@ -1,14 +1,18 @@
 export interface Naming {
-	singular: string;
-	plural: string;
+  singular: string;
+  plural: string;
 }
 export interface Unit {
-	name: Naming;
-	toAnchor: number;
-	anchorShift?: number;
+  name: Naming;
+  toAnchor: number;
+  anchorShift?: number;
 }
 
-export interface Conversion<TMeasures extends string, TSystems extends string, TUnits extends string> {
+export interface Conversion<
+  TMeasures extends string,
+  TSystems extends string,
+  TUnits extends string
+> {
   abbr: TUnits;
   measure: TMeasures;
   system: TSystems;
@@ -16,32 +20,46 @@ export interface Conversion<TMeasures extends string, TSystems extends string, T
 }
 
 export interface UnitDescription {
-	abbr: string;
-	measure: string;
-	system: string;
-	singular: string;
-	plural: string;
+  abbr: string;
+  measure: string;
+  system: string;
+  singular: string;
+  plural: string;
 }
 
 type TransformFunc = (value: number) => number;
 
 export interface Anchor {
-	ratio?: number;
-	transform?: TransformFunc;
+  ratio?: number;
+  transform?: TransformFunc;
 }
 
 export interface Measure<TSystems extends string, TUnits extends string> {
-	systems: Partial<Record<TSystems, Partial<Record<TUnits, Unit>>>>;
-	anchors?: Partial<Record<TSystems, Partial<Record<TSystems, Anchor>>>>;
+  systems: Partial<Record<TSystems, Partial<Record<TUnits, Unit>>>>;
+  anchors?: Partial<Record<TSystems, Partial<Record<TSystems, Anchor>>>>;
 }
 
-export class Converter<TMeasures extends string, TSystems extends string, TUnits extends string> {
+export interface BestResult {
+  val: number;
+  unit: string;
+  singular: string;
+  plural: string;
+}
+
+export class Converter<
+  TMeasures extends string,
+  TSystems extends string,
+  TUnits extends string
+> {
   private val = 0;
   private destination: Conversion<TMeasures, TSystems, TUnits> | null = null;
   private origin: Conversion<TMeasures, TSystems, TUnits> | null = null;
   private measureData: Record<TMeasures, Measure<TSystems, TUnits>>;
 
-  public constructor( measures: Record<TMeasures, Measure<TSystems, TUnits>>, value?: number) {
+  public constructor(
+    measures: Record<TMeasures, Measure<TSystems, TUnits>>,
+    value?: number
+  ) {
     if (value) {
       this.val = value;
     }
@@ -57,8 +75,9 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
    * Lets the converter know the source unit abbreviation
    */
   public from(from: TUnits): this {
-    if (this.destination != null)
-      {throw new Error(".from must be called before .to");}
+    if (this.destination != null) {
+      throw new Error(".from must be called before .to");
+    }
 
     this.origin = this.getUnit(from);
 
@@ -73,7 +92,9 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
    * Converts the unit and returns the value
    */
   public to(to: TUnits): number {
-    if (this.origin == null) {throw new Error(".to must be called after .from");}
+    if (this.origin == null) {
+      throw new Error(".to must be called after .from");
+    }
 
     this.destination = this.getUnit(to);
 
@@ -81,7 +102,11 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
       this.throwUnsupportedUnitError(to);
     }
 
-    const destination = this.destination as Conversion<TMeasures, TSystems, TUnits>;
+    const destination = this.destination as Conversion<
+      TMeasures,
+      TSystems,
+      TUnits
+    >;
     const origin = this.origin as Conversion<TMeasures, TSystems, TUnits>;
 
     // Don't change the value if origin and destination are the same
@@ -125,7 +150,8 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
         );
       }
 
-      const anchor: Partial<Record<TSystems, Anchor>> | undefined = anchors[origin.system];
+      const anchor: Partial<Record<TSystems, Anchor>> | undefined =
+        anchors[origin.system];
       if (anchor == null) {
         throw new Error(
           `Unable to find anchor for "${origin.measure}" to "${destination.measure}". Please make sure it is defined.`
@@ -157,6 +183,62 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
      * Convert to another unit inside the destination system
      */
     return result / destination.unit.toAnchor;
+  }
+  /**
+   * Converts the unit to the best available unit.
+   */
+  toBest(options?: {
+    exclude?: TUnits[];
+    cutOffNumber?: number;
+    system?: TSystems;
+  }): BestResult | null {
+    if (this.origin == null)
+      throw new Error(".toBest must be called after .from");
+
+    const isNegative = this.val < 0;
+
+    let exclude: TUnits[] = [];
+    let cutOffNumber = isNegative ? -1 : 1;
+    let system = this.origin.system;
+
+    if (typeof options === "object") {
+      exclude = options.exclude ?? [];
+      cutOffNumber = options.cutOffNumber ?? cutOffNumber;
+      system = options.system ?? this.origin.system;
+    }
+
+    let best: BestResult | null = null;
+    /**
+      Looks through every possibility for the 'best' available unit.
+      i.e. Where the value has the fewest numbers before the decimal point,
+      but is still higher than 1.
+    */
+    for (const possibility of this.possibilities()) {
+      const unit = this.describe(possibility);
+      const isIncluded = exclude.indexOf(possibility) === -1;
+
+      if (isIncluded && unit.system === system) {
+        const result = this.to(possibility);
+        if (isNegative ? result > cutOffNumber : result < cutOffNumber) {
+          continue;
+        }
+        if (
+          best === null ||
+          (isNegative
+            ? result <= cutOffNumber && result > best.val
+            : result >= cutOffNumber && result < best.val)
+        ) {
+          best = {
+            val: result,
+            unit: possibility,
+            singular: unit.singular,
+            plural: unit.plural,
+          };
+        }
+      }
+    }
+
+    return best;
   }
   /**
    * Finds the unit
@@ -197,7 +279,7 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
     this.throwUnsupportedUnitError(abbr);
   }
 
- /**
+  /**
    * Detailed list of all supported units
    *
    * If a measure is supplied the list will only contain
@@ -255,7 +337,6 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
     return list;
   }
 
-
   /**
    * Returns the abbreviated measures that the value can be
    * converted to.
@@ -294,7 +375,9 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
     return Object.keys(this.measureData) as TMeasures[];
   }
 
-  private describeUnit(unit: Conversion<TMeasures, TSystems, TUnits>): UnitDescription {
+  private describeUnit(
+    unit: Conversion<TMeasures, TSystems, TUnits>
+  ): UnitDescription {
     return {
       abbr: unit.abbr,
       measure: unit.measure,
@@ -303,7 +386,6 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
       plural: unit.unit.name.plural,
     };
   }
-
 
   private throwUnsupportedUnitError(what: string): never {
     let validUnits: string[] = [];
@@ -324,4 +406,9 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
   }
 }
 
-export const initConverter = <TMeasures extends string, TSystems extends string, TUnits extends string>(measures: Record<TMeasures, Measure<TSystems, TUnits>>): (value?: number) => Converter<TMeasures, TSystems, TUnits> => (value?: number) => new Converter<TMeasures, TSystems, TUnits>(measures, value);
+export const initConverter =
+  <TMeasures extends string, TSystems extends string, TUnits extends string>(
+    measures: Record<TMeasures, Measure<TSystems, TUnits>>
+  ): ((value?: number) => Converter<TMeasures, TSystems, TUnits>) =>
+  (value?: number) =>
+    new Converter<TMeasures, TSystems, TUnits>(measures, value);
