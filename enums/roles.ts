@@ -1,6 +1,6 @@
 export enum Role {
-	USER,
-	MODERATOR,
-	ADMIN,
-	SUPERADMIN
+  USER,
+  MODERATOR,
+  ADMIN,
+  SUPERADMIN,
 }

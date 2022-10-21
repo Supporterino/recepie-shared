@@ -11,7 +11,7 @@ export interface Unit {
 export interface Conversion<
   TMeasures extends string,
   TSystems extends string,
-  TUnits extends string
+  TUnits extends string,
 > {
   abbr: TUnits;
   measure: TMeasures;
@@ -46,20 +46,13 @@ export interface BestResult {
   plural: string;
 }
 
-export class Converter<
-  TMeasures extends string,
-  TSystems extends string,
-  TUnits extends string
-> {
+export class Converter<TMeasures extends string, TSystems extends string, TUnits extends string> {
   private val = 0;
   private destination: Conversion<TMeasures, TSystems, TUnits> | null = null;
   private origin: Conversion<TMeasures, TSystems, TUnits> | null = null;
   private measureData: Record<TMeasures, Measure<TSystems, TUnits>>;
 
-  public constructor(
-    measures: Record<TMeasures, Measure<TSystems, TUnits>>,
-    value?: number
-  ) {
+  public constructor(measures: Record<TMeasures, Measure<TSystems, TUnits>>, value?: number) {
     if (value) {
       this.val = value;
     }
@@ -102,11 +95,7 @@ export class Converter<
       this.throwUnsupportedUnitError(to);
     }
 
-    const destination = this.destination as Conversion<
-      TMeasures,
-      TSystems,
-      TUnits
-    >;
+    const destination = this.destination as Conversion<TMeasures, TSystems, TUnits>;
     const origin = this.origin as Conversion<TMeasures, TSystems, TUnits>;
 
     // Don't change the value if origin and destination are the same
@@ -117,7 +106,7 @@ export class Converter<
     // You can't go from liquid to mass, for example
     if (destination.measure !== origin.measure) {
       throw new Error(
-        `Cannot convert incompatible measures of ${destination.measure} and ${origin.measure}`
+        `Cannot convert incompatible measures of ${destination.measure} and ${origin.measure}`,
       );
     }
 
@@ -146,15 +135,14 @@ export class Converter<
       const anchors = measure.anchors;
       if (anchors == null) {
         throw new Error(
-          `Unable to convert units. Anchors are missing for "${origin.measure}" and "${destination.measure}" measures.`
+          `Unable to convert units. Anchors are missing for "${origin.measure}" and "${destination.measure}" measures.`,
         );
       }
 
-      const anchor: Partial<Record<TSystems, Anchor>> | undefined =
-        anchors[origin.system];
+      const anchor: Partial<Record<TSystems, Anchor>> | undefined = anchors[origin.system];
       if (anchor == null) {
         throw new Error(
-          `Unable to find anchor for "${origin.measure}" to "${destination.measure}". Please make sure it is defined.`
+          `Unable to find anchor for "${origin.measure}" to "${destination.measure}". Please make sure it is defined.`,
         );
       }
 
@@ -167,7 +155,7 @@ export class Converter<
         result *= ratio;
       } else {
         throw new Error(
-          "A system anchor needs to either have a defined ratio number or a transform function."
+          "A system anchor needs to either have a defined ratio number or a transform function.",
         );
       }
     }
@@ -192,8 +180,7 @@ export class Converter<
     cutOffNumber?: number;
     system?: TSystems;
   }): BestResult | null {
-    if (this.origin == null)
-      throw new Error(".toBest must be called after .from");
+    if (this.origin == null) throw new Error(".toBest must be called after .from");
 
     const isNegative = this.val < 0;
 
@@ -246,11 +233,9 @@ export class Converter<
   public getUnit(abbr: TUnits): Conversion<TMeasures, TSystems, TUnits> | null {
     for (const [measureName, measure] of Object.entries(this.measureData)) {
       for (const [systemName, system] of Object.entries(
-        (measure as Measure<TSystems, TUnits>).systems
+        (measure as Measure<TSystems, TUnits>).systems,
       )) {
-        for (const [testAbbr, unit] of Object.entries(
-          system as Partial<Record<TUnits, Unit>>
-        )) {
+        for (const [testAbbr, unit] of Object.entries(system as Partial<Record<TUnits, Unit>>)) {
           if (testAbbr === abbr) {
             return {
               abbr: abbr as TUnits,
@@ -296,18 +281,16 @@ export class Converter<
     if (measureName == null) {
       for (const [name, measure] of Object.entries(this.measureData)) {
         for (const [systemName, units] of Object.entries(
-          (measure as Measure<TSystems, TUnits>).systems
+          (measure as Measure<TSystems, TUnits>).systems,
         )) {
-          for (const [abbr, unit] of Object.entries(
-            units as Partial<Record<TUnits, Unit>>
-          )) {
+          for (const [abbr, unit] of Object.entries(units as Partial<Record<TUnits, Unit>>)) {
             list.push(
               this.describeUnit({
                 abbr: abbr as TUnits,
                 measure: name as TMeasures,
                 system: systemName as TSystems,
                 unit: unit as Unit,
-              })
+              }),
             );
           }
         }
@@ -317,18 +300,16 @@ export class Converter<
     } else {
       const measure = this.measureData[measureName];
       for (const [systemName, units] of Object.entries(
-        (measure as Measure<TSystems, TUnits>).systems
+        (measure as Measure<TSystems, TUnits>).systems,
       )) {
-        for (const [abbr, unit] of Object.entries(
-          units as Partial<Record<TUnits, Unit>>
-        )) {
+        for (const [abbr, unit] of Object.entries(units as Partial<Record<TUnits, Unit>>)) {
           list.push(
             this.describeUnit({
               abbr: abbr as TUnits,
               measure: measureName as TMeasures,
               system: systemName as TSystems,
               unit: unit as Unit,
-            })
+            }),
           );
         }
       }
@@ -375,9 +356,7 @@ export class Converter<
     return Object.keys(this.measureData) as TMeasures[];
   }
 
-  private describeUnit(
-    unit: Conversion<TMeasures, TSystems, TUnits>
-  ): UnitDescription {
+  private describeUnit(unit: Conversion<TMeasures, TSystems, TUnits>): UnitDescription {
     return {
       abbr: unit.abbr,
       measure: unit.measure,
@@ -391,24 +370,18 @@ export class Converter<
     let validUnits: string[] = [];
 
     for (const measure of Object.values(this.measureData)) {
-      for (const systems of Object.values(
-        (measure as Measure<TSystems, TUnits>).systems
-      )) {
-        validUnits = validUnits.concat(
-          Object.keys(systems as Record<TUnits, Unit>)
-        );
+      for (const systems of Object.values((measure as Measure<TSystems, TUnits>).systems)) {
+        validUnits = validUnits.concat(Object.keys(systems as Record<TUnits, Unit>));
       }
     }
 
-    throw new Error(
-      `Unsupported unit ${what}, use one of: ${validUnits.join(", ")}`
-    );
+    throw new Error(`Unsupported unit ${what}, use one of: ${validUnits.join(", ")}`);
   }
 }
 
 export const initConverter =
   <TMeasures extends string, TSystems extends string, TUnits extends string>(
-    measures: Record<TMeasures, Measure<TSystems, TUnits>>
+    measures: Record<TMeasures, Measure<TSystems, TUnits>>,
   ): ((value?: number) => Converter<TMeasures, TSystems, TUnits>) =>
   (value?: number) =>
     new Converter<TMeasures, TSystems, TUnits>(measures, value);

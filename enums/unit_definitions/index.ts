@@ -12,24 +12,11 @@ export type AllMeasuresSystems =
   | TemperatureSystems
   | VolumeSystems;
 
-export type AllMeasuresUnits =
-  | EachUnits
-  | MassUnits
-  | PiecesUnits
-  | TemperatureUnits
-  | VolumeUnits;
+export type AllMeasuresUnits = EachUnits | MassUnits | PiecesUnits | TemperatureUnits | VolumeUnits;
 
-export type AllMeasures =
-  | "each"
-  | "mass"
-  | "pieces"
-  | "temperature"
-  | "volume";
+export type AllMeasures = "each" | "mass" | "pieces" | "temperature" | "volume";
 
-export const allMeasures: Record<
-  AllMeasures,
-  Measure<AllMeasuresSystems, AllMeasuresUnits>
-> = {
+export const allMeasures: Record<AllMeasures, Measure<AllMeasuresSystems, AllMeasuresUnits>> = {
   each,
   mass,
   pieces,
@@ -49,10 +36,4 @@ export type {
   TemperatureUnits,
   VolumeUnits,
 };
-export {
-  each,
-  mass,
-  pieces,
-  temperature,
-  volume,
-};
+export { each, mass, pieces, temperature, volume };

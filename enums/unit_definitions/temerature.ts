@@ -1,8 +1,6 @@
 import { Unit, Measure } from "../units";
 
-export type TemperatureUnits =
-  | TemperatureMetricUnits
-  | TemperatureImperialUnits;
+export type TemperatureUnits = TemperatureMetricUnits | TemperatureImperialUnits;
 export type TemperatureSystems = "metric" | "imperial";
 
 export type TemperatureMetricUnits = "C" | "K";

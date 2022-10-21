@@ -1,5 +1,5 @@
 export enum RatingOperations {
-	ADD,
-	UPDATE,
-	REMOVE
+  ADD,
+  UPDATE,
+  REMOVE,
 }

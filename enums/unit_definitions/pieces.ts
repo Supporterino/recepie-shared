@@ -19,7 +19,7 @@ export type PiecesUnitUnits =
   | "trio";
 
 const unit: Record<PiecesUnitUnits, Unit> = {
-  "pcs": {
+  pcs: {
     name: {
       singular: "Piece",
       plural: "Pieces",
@@ -33,7 +33,7 @@ const unit: Record<PiecesUnitUnits, Unit> = {
     },
     toAnchor: 13,
   },
-  "cp": {
+  cp: {
     name: {
       singular: "Couple",
       plural: "Couples",
@@ -47,7 +47,7 @@ const unit: Record<PiecesUnitUnits, Unit> = {
     },
     toAnchor: 144,
   },
-  "doz": {
+  doz: {
     name: {
       singular: "Dozen",
       plural: "Dozens",
@@ -61,7 +61,7 @@ const unit: Record<PiecesUnitUnits, Unit> = {
     },
     toAnchor: 1728,
   },
-  "gros": {
+  gros: {
     name: {
       singular: "Gross",
       plural: "Gross",
@@ -82,14 +82,14 @@ const unit: Record<PiecesUnitUnits, Unit> = {
     },
     toAnchor: 120,
   },
-  "ream": {
+  ream: {
     name: {
       singular: "Reams",
       plural: "Reams",
     },
     toAnchor: 500,
   },
-  "scores": {
+  scores: {
     name: {
       singular: "Scores",
       plural: "Scores",
@@ -103,7 +103,7 @@ const unit: Record<PiecesUnitUnits, Unit> = {
     },
     toAnchor: 120,
   },
-  "trio": {
+  trio: {
     name: {
       singular: "Trio",
       plural: "Trio",

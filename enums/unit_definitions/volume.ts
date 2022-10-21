@@ -6,21 +6,20 @@ export type VolumeSystems = "metric" | "imperial";
 export type VolumeMetricUnits =
   // | "mm3"
   // | "cm3"
-  | "ml"
-  | "l"
-  // | "kl"
-  // | "Ml"
-  // | "Gl"
-  // | "m3"
-  // | "km3"
-  // | "cl"
-  // | "dl"
-  // | "krm"
-  // | "tsk"
-  // | "msk"
-  // | "kkp"
-  // | "glas"
-  // | "kanna";
+  "ml" | "l";
+// | "kl"
+// | "Ml"
+// | "Gl"
+// | "m3"
+// | "km3"
+// | "cl"
+// | "dl"
+// | "krm"
+// | "tsk"
+// | "msk"
+// | "kkp"
+// | "glas"
+// | "kanna";
 
 export type VolumeImperialUnits =
   | "tsp"
@@ -30,9 +29,9 @@ export type VolumeImperialUnits =
   | "cup"
   // | "pnt"
   // | "qt"
-  | "gal"
-  // | "ft3"
-  // | "yd3";
+  | "gal";
+// | "ft3"
+// | "yd3";
 
 const metric: Record<VolumeMetricUnits, Unit> = {
   // mm3: {
@@ -159,14 +158,14 @@ const metric: Record<VolumeMetricUnits, Unit> = {
 };
 
 const imperial: Record<VolumeImperialUnits, Unit> = {
-  "tsp": {
+  tsp: {
     name: {
       singular: "Teaspoon",
       plural: "Teaspoons",
     },
     toAnchor: 1 / 6,
   },
-  "Tbs": {
+  Tbs: {
     name: {
       singular: "Tablespoon",
       plural: "Tablespoons",
@@ -187,7 +186,7 @@ const imperial: Record<VolumeImperialUnits, Unit> = {
     },
     toAnchor: 1,
   },
-  "cup": {
+  cup: {
     name: {
       singular: "Cup",
       plural: "Cups",
@@ -208,7 +207,7 @@ const imperial: Record<VolumeImperialUnits, Unit> = {
   //   },
   //   toAnchor: 32,
   // },
-  "gal": {
+  gal: {
     name: {
       singular: "Gallon",
       plural: "Gallons",
