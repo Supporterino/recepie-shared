@@ -8,3 +8,5 @@ export enum Role {
 export const getRoleKeyName = (value: Role) => {
   return Role[value];
 };
+
+export type RoleType = keyof typeof Role
