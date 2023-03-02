@@ -6,15 +6,16 @@ export interface Recipe {
   id: string;
   name: string;
   description: string;
-  ingredients: Ingredients;
-  steps: string[];
-  rating: RatingInfo;
-  tags: string[];
-  owner: User;
   picture: string;
-  creationTimestamp: Date;
-  updateTimestamp: Date;
-  isFavorite: boolean;
+  steps: string[];
+  tags: string[];
+  additionalPictures?: string[];
   myRating: number;
   isCookList: boolean;
+  isFavorite: boolean;
+  updateTimestamp: Date;
+  creationTimestamp: Date;
+  rating: RatingInfo;
+  owner: User;
+  ingredients: Ingredients;
 }
