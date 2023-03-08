@@ -1,22 +1,22 @@
-import { Measure, Unit } from "../units";
+import { Measure, Unit } from '../units';
 
 export type EachUnits = EachMetricUnits;
-export type EachSystems = "metric";
+export type EachSystems = 'metric';
 
-export type EachMetricUnits = "ea" | "dz";
+export type EachMetricUnits = 'ea' | 'dz';
 
 const metric: Record<EachMetricUnits, Unit> = {
     ea: {
         name: {
-            singular: "Each",
-            plural: "Each",
+            singular: 'Each',
+            plural: 'Each',
         },
         toAnchor: 1,
     },
     dz: {
         name: {
-            singular: "Dozen",
-            plural: "Dozens",
+            singular: 'Dozen',
+            plural: 'Dozens',
         },
         toAnchor: 12,
     },

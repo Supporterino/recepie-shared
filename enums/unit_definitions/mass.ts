@@ -1,10 +1,10 @@
-import { Measure, Unit } from "../units";
+import { Measure, Unit } from '../units';
 
 export type MassUnits = MassMetricUnits | MassImperialUnits;
-export type MassSystems = "metric" | "imperial";
+export type MassSystems = 'metric' | 'imperial';
 
-export type MassMetricUnits = "g" | "kg"; //"mcg" | "mg" | "g" | "kg" | "mt";
-export type MassImperialUnits = "oz" | "lb"; //| "t";
+export type MassMetricUnits = 'g' | 'kg'; //"mcg" | "mg" | "g" | "kg" | "mt";
+export type MassImperialUnits = 'oz' | 'lb'; //| "t";
 
 const metric: Record<MassMetricUnits, Unit> = {
     // mcg: {
@@ -23,15 +23,15 @@ const metric: Record<MassMetricUnits, Unit> = {
     // },
     g: {
         name: {
-            singular: "Gram",
-            plural: "Grams",
+            singular: 'Gram',
+            plural: 'Grams',
         },
         toAnchor: 1,
     },
     kg: {
         name: {
-            singular: "Kilogram",
-            plural: "Kilograms",
+            singular: 'Kilogram',
+            plural: 'Kilograms',
         },
         toAnchor: 1000,
     },
@@ -47,15 +47,15 @@ const metric: Record<MassMetricUnits, Unit> = {
 const imperial: Record<MassImperialUnits, Unit> = {
     oz: {
         name: {
-            singular: "Ounce",
-            plural: "Ounces",
+            singular: 'Ounce',
+            plural: 'Ounces',
         },
         toAnchor: 1 / 16,
     },
     lb: {
         name: {
-            singular: "Pound",
-            plural: "Pounds",
+            singular: 'Pound',
+            plural: 'Pounds',
         },
         toAnchor: 1,
     },

@@ -1,12 +1,12 @@
-import { Unit, Measure } from "../units";
+import { Unit, Measure } from '../units';
 
 export type VolumeUnits = VolumeMetricUnits | VolumeImperialUnits;
-export type VolumeSystems = "metric" | "imperial";
+export type VolumeSystems = 'metric' | 'imperial';
 
 export type VolumeMetricUnits =
     // | "mm3"
     // | "cm3"
-    "ml" | "l";
+    'ml' | 'l';
 // | "kl"
 // | "Ml"
 // | "Gl"
@@ -22,14 +22,14 @@ export type VolumeMetricUnits =
 // | "kanna";
 
 export type VolumeImperialUnits =
-    | "tsp"
-    | "Tbs"
+    | 'tsp'
+    | 'Tbs'
     // | "in3"
-    | "fl-oz"
-    | "cup"
+    | 'fl-oz'
+    | 'cup'
     // | "pnt"
     // | "qt"
-    | "gal";
+    | 'gal';
 // | "ft3"
 // | "yd3";
 
@@ -50,8 +50,8 @@ const metric: Record<VolumeMetricUnits, Unit> = {
     // },
     ml: {
         name: {
-            singular: "Millilitre",
-            plural: "Millilitres",
+            singular: 'Millilitre',
+            plural: 'Millilitres',
         },
         toAnchor: 1 / 1000,
     },
@@ -71,8 +71,8 @@ const metric: Record<VolumeMetricUnits, Unit> = {
     // },
     l: {
         name: {
-            singular: "Litre",
-            plural: "Litres",
+            singular: 'Litre',
+            plural: 'Litres',
         },
         toAnchor: 1,
     },
@@ -160,15 +160,15 @@ const metric: Record<VolumeMetricUnits, Unit> = {
 const imperial: Record<VolumeImperialUnits, Unit> = {
     tsp: {
         name: {
-            singular: "Teaspoon",
-            plural: "Teaspoons",
+            singular: 'Teaspoon',
+            plural: 'Teaspoons',
         },
         toAnchor: 1 / 6,
     },
     Tbs: {
         name: {
-            singular: "Tablespoon",
-            plural: "Tablespoons",
+            singular: 'Tablespoon',
+            plural: 'Tablespoons',
         },
         toAnchor: 1 / 2,
     },
@@ -179,17 +179,17 @@ const imperial: Record<VolumeImperialUnits, Unit> = {
     //   },
     //   toAnchor: 0.55411,
     // },
-    "fl-oz": {
+    'fl-oz': {
         name: {
-            singular: "Fluid Ounce",
-            plural: "Fluid Ounces",
+            singular: 'Fluid Ounce',
+            plural: 'Fluid Ounces',
         },
         toAnchor: 1,
     },
     cup: {
         name: {
-            singular: "Cup",
-            plural: "Cups",
+            singular: 'Cup',
+            plural: 'Cups',
         },
         toAnchor: 8,
     },
@@ -209,8 +209,8 @@ const imperial: Record<VolumeImperialUnits, Unit> = {
     // },
     gal: {
         name: {
-            singular: "Gallon",
-            plural: "Gallons",
+            singular: 'Gallon',
+            plural: 'Gallons',
         },
         toAnchor: 128,
     },

@@ -53,8 +53,8 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
             this.val = value;
         }
 
-        if (typeof measures !== "object") {
-            throw new Error("Measures cannot be blank");
+        if (typeof measures !== 'object') {
+            throw new Error('Measures cannot be blank');
         }
 
         this.measureData = measures;
@@ -65,7 +65,7 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
      */
     public from(from: TUnits): this {
         if (this.destination != null) {
-            throw new Error(".from must be called before .to");
+            throw new Error('.from must be called before .to');
         }
 
         this.origin = this.getUnit(from);
@@ -82,7 +82,7 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
      */
     public to(to: TUnits): number {
         if (this.origin == null) {
-            throw new Error(".to must be called after .from");
+            throw new Error('.to must be called after .from');
         }
 
         this.destination = this.getUnit(to);
@@ -143,12 +143,12 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
             const transform: unknown = anchor[destination.system]?.transform;
             const ratio: unknown = anchor[destination.system]?.ratio;
 
-            if (typeof transform === "function") {
+            if (typeof transform === 'function') {
                 result = transform(result);
-            } else if (typeof ratio === "number") {
+            } else if (typeof ratio === 'number') {
                 result *= ratio;
             } else {
-                throw new Error("A system anchor needs to either have a defined ratio number or a transform function.");
+                throw new Error('A system anchor needs to either have a defined ratio number or a transform function.');
             }
         }
 
@@ -168,7 +168,7 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
      * Converts the unit to the best available unit.
      */
     toBest(options?: { exclude?: TUnits[]; cutOffNumber?: number; system?: TSystems }): BestResult | null {
-        if (this.origin == null) throw new Error(".toBest must be called after .from");
+        if (this.origin == null) throw new Error('.toBest must be called after .from');
 
         const isNegative = this.val < 0;
 
@@ -176,7 +176,7 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
         let cutOffNumber = isNegative ? -1 : 1;
         let system = this.origin.system;
 
-        if (typeof options === "object") {
+        if (typeof options === 'object') {
             exclude = options.exclude ?? [];
             cutOffNumber = options.cutOffNumber ?? cutOffNumber;
             system = options.system ?? this.origin.system;
@@ -306,7 +306,7 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
         let possibilities: TUnits[] = [];
         let listMeasures: TMeasures[] = [];
 
-        if (typeof forMeasure == "string") {
+        if (typeof forMeasure == 'string') {
             listMeasures.push(forMeasure);
         } else if (this.origin != null) {
             listMeasures.push(this.origin.measure);
@@ -352,7 +352,7 @@ export class Converter<TMeasures extends string, TSystems extends string, TUnits
             }
         }
 
-        throw new Error(`Unsupported unit ${what}, use one of: ${validUnits.join(", ")}`);
+        throw new Error(`Unsupported unit ${what}, use one of: ${validUnits.join(', ')}`);
     }
 }
 

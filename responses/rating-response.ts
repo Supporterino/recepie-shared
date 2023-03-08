@@ -1,4 +1,4 @@
-import { RatingOperations, Response } from "..";
+import { RatingOperations, Response } from '..';
 
 export interface RatingResponse extends Response {
     success: boolean;

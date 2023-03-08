@@ -1,4 +1,4 @@
-import { AllMeasuresUnits } from "../enums";
+import { AllMeasuresUnits } from '../enums';
 
 export interface Ingredient {
     name: string;

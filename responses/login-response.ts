@@ -1,4 +1,4 @@
-import { Response } from "..";
+import { Response } from '..';
 
 export interface LoginResponse extends Response {
     jwtToken: string;

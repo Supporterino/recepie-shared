@@ -1,5 +1,5 @@
-import { Ingredient } from "./ingredient";
-import { IngredientSection } from "./ingredientSection";
+import { Ingredient } from './ingredient';
+import { IngredientSection } from './ingredientSection';
 
 export interface Ingredients {
     numServings: number;

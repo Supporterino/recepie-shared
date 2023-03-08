@@ -1,6 +1,6 @@
-import { User } from "..";
-import { Ingredients } from "./ingredients";
-import { RatingInfo } from "./ratingInfo";
+import { User } from '..';
+import { Ingredients } from './ingredients';
+import { RatingInfo } from './ratingInfo';
 
 export interface Recipe {
     id: string;

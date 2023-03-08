@@ -1,4 +1,4 @@
-import { Ingredients } from "./ingredients";
+import { Ingredients } from './ingredients';
 
 export interface CreationData {
     name: string;
