@@ -1,7 +1,9 @@
-import { Response } from '..';
+import {
+  type Response,
+} from '..';
 
-export interface LoginResponse extends Response {
-    jwtToken: string;
-    refreshToken: string;
-    userID: string;
-}
+export type LoginResponse = Response & {
+  jwtToken: string,
+  refreshToken: string,
+  userID: string,
+};

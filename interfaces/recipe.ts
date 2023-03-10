@@ -1,21 +1,27 @@
-import { User } from '..';
-import { Ingredients } from './ingredients';
-import { RatingInfo } from './ratingInfo';
+import {
+  type User,
+} from '..';
+import {
+  type Ingredients,
+} from './ingredients';
+import {
+  type RatingInfo,
+} from './ratingInfo';
 
-export interface Recipe {
-    id: string;
-    name: string;
-    description: string;
-    picture: string;
-    steps: string[];
-    tags: string[];
-    additionalPictures?: string[];
-    myRating: number;
-    isCookList: boolean;
-    isFavorite: boolean;
-    updateTimestamp: Date;
-    creationTimestamp: Date;
-    rating: RatingInfo;
-    owner: User;
-    ingredients: Ingredients;
-}
+export type Recipe = {
+  additionalPictures?: string[],
+  creationTimestamp: Date,
+  description: string,
+  id: string,
+  ingredients: Ingredients,
+  isCookList: boolean,
+  isFavorite: boolean,
+  myRating: number,
+  name: string,
+  owner: User,
+  picture: string,
+  rating: RatingInfo,
+  steps: string[],
+  tags: string[],
+  updateTimestamp: Date,
+};

@@ -1,8 +1,12 @@
-import { Ingredient } from './ingredient';
-import { IngredientSection } from './ingredientSection';
+import {
+  type Ingredient,
+} from './ingredient';
+import {
+  type IngredientSection,
+} from './ingredientSection';
 
-export interface Ingredients {
-    numServings: number;
-    items?: Ingredient[];
-    sections?: IngredientSection[];
-}
+export type Ingredients = {
+  items?: Ingredient[],
+  numServings: number,
+  sections?: IngredientSection[],
+};

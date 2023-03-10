@@ -1,5 +1,7 @@
-import { Response } from '..';
+import {
+  type Response,
+} from '..';
 
-export interface UpdateResponse extends Response {
-    recipeID: string;
-}
+export type UpdateResponse = Response & {
+  recipeID: string,
+};

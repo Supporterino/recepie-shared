@@ -1,8 +1,11 @@
-import { RatingOperations, Response } from '..';
+import {
+  type RatingOperations,
+  type Response,
+} from '..';
 
-export interface RatingResponse extends Response {
-    success: boolean;
-    method: RatingOperations;
-    recipeID: string;
-    userID: string;
-}
+export type RatingResponse = Response & {
+  method: RatingOperations,
+  recipeID: string,
+  success: boolean,
+  userID: string,
+};

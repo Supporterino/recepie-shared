@@ -1,90 +1,65 @@
-import { Measure, Unit } from '../units';
+import {
+  type Measure,
+  type Unit,
+} from '../units';
 
-export type MassUnits = MassMetricUnits | MassImperialUnits;
-export type MassSystems = 'metric' | 'imperial';
+export type MassUnits = MassImperialUnits | MassMetricUnits;
+export type MassSystems = 'imperial' | 'metric';
 
-export type MassMetricUnits = 'g' | 'kg'; //"mcg" | "mg" | "g" | "kg" | "mt";
-export type MassImperialUnits = 'oz' | 'lb'; //| "t";
+export type MassMetricUnits = 'g' | 'kg';
+export type MassImperialUnits = 'lb' | 'oz';
 
 const metric: Record<MassMetricUnits, Unit> = {
-    // mcg: {
-    //   name: {
-    //     singular: "Microgram",
-    //     plural: "Micrograms",
-    //   },
-    //   toAnchor: 1 / 1000000,
-    // },
-    // mg: {
-    //   name: {
-    //     singular: "Milligram",
-    //     plural: "Milligrams",
-    //   },
-    //   toAnchor: 1 / 1000,
-    // },
-    g: {
-        name: {
-            singular: 'Gram',
-            plural: 'Grams',
-        },
-        toAnchor: 1,
+  g: {
+    name: {
+      plural: 'Grams',
+      singular: 'Gram',
     },
-    kg: {
-        name: {
-            singular: 'Kilogram',
-            plural: 'Kilograms',
-        },
-        toAnchor: 1000,
+    toAnchor: 1,
+  },
+  kg: {
+    name: {
+      plural: 'Kilograms',
+      singular: 'Kilogram',
     },
-    // mt: {
-    //   name: {
-    //     singular: "Metric Tonne",
-    //     plural: "Metric Tonnes",
-    //   },
-    //   toAnchor: 1000000,
-    // },
+    toAnchor: 1_000,
+  },
 };
 
 const imperial: Record<MassImperialUnits, Unit> = {
-    oz: {
-        name: {
-            singular: 'Ounce',
-            plural: 'Ounces',
-        },
-        toAnchor: 1 / 16,
+  lb: {
+    name: {
+      plural: 'Pounds',
+      singular: 'Pound',
     },
-    lb: {
-        name: {
-            singular: 'Pound',
-            plural: 'Pounds',
-        },
-        toAnchor: 1,
+    toAnchor: 1,
+  },
+  oz: {
+    name: {
+      plural: 'Ounces',
+      singular: 'Ounce',
     },
-    // t: {
-    //   name: {
-    //     singular: "Ton",
-    //     plural: "Tons",
-    //   },
-    //   toAnchor: 2000,
-    // },
+    toAnchor: 1 / 16,
+  },
 };
 
-const measure: Measure<MassSystems, MassUnits> = {
-    systems: {
-        metric,
-        imperial,
+const mass: Measure<MassSystems, MassUnits> = {
+  anchors: {
+    imperial: {
+      metric: {
+        ratio: 453.592,
+      },
     },
-    anchors: {
-        metric: {
-            imperial: {
-                ratio: 1 / 453.592,
-            },
-        },
-        imperial: {
-            metric: {
-                ratio: 453.592,
-            },
-        },
+    metric: {
+      imperial: {
+        ratio: 1 / 453.592,
+      },
     },
+  },
+  systems: {
+    imperial,
+    metric,
+  },
 };
 
-export default measure;
+export default mass;

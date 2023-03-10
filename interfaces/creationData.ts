@@ -1,9 +1,11 @@
-import { Ingredients } from './ingredients';
+import {
+  type Ingredients,
+} from './ingredients';
 
-export interface CreationData {
-    name: string;
-    description: string;
-    ingredients: Ingredients;
-    steps: string[];
-    tags: string[];
-}
+export type CreationData = {
+  description: string,
+  ingredients: Ingredients,
+  name: string,
+  steps: string[],
+  tags: string[],
+};

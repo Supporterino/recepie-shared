@@ -1,6 +1,8 @@
-import { Ingredient } from './ingredient';
+import {
+  type Ingredient,
+} from './ingredient';
 
-export interface IngredientSection {
-    name: string;
-    items: Ingredient[];
-}
+export type IngredientSection = {
+  items: Ingredient[],
+  name: string,
+};

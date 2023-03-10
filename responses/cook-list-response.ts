@@ -1,5 +1,7 @@
-import { Response } from '..';
+import {
+  type Response,
+} from '..';
 
-export interface CookListResponse extends Response {
-    success: boolean;
-}
+export type CookListResponse = Response & {
+  success: boolean,
+};

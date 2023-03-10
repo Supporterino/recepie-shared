@@ -1,6 +1,8 @@
-import { Response } from '..';
+import {
+  type Response,
+} from '..';
 
-export interface FavoriteResponse extends Response {
-    success: boolean;
-    method: string;
-}
+export type FavoriteResponse = Response & {
+  method: string,
+  success: boolean,
+};

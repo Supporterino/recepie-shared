@@ -1,31 +1,34 @@
-import { Measure, Unit } from '../units';
+import {
+  type Measure,
+  type Unit,
+} from '../units';
 
 export type EachUnits = EachMetricUnits;
 export type EachSystems = 'metric';
 
-export type EachMetricUnits = 'ea' | 'dz';
+export type EachMetricUnits = 'dz' | 'ea';
 
 const metric: Record<EachMetricUnits, Unit> = {
-    ea: {
-        name: {
-            singular: 'Each',
-            plural: 'Each',
-        },
-        toAnchor: 1,
+  dz: {
+    name: {
+      plural: 'Dozens',
+      singular: 'Dozen',
     },
-    dz: {
-        name: {
-            singular: 'Dozen',
-            plural: 'Dozens',
-        },
-        toAnchor: 12,
+    toAnchor: 12,
+  },
+  ea: {
+    name: {
+      plural: 'Each',
+      singular: 'Each',
     },
+    toAnchor: 1,
+  },
 };
 
-const measure: Measure<EachSystems, EachUnits> = {
-    systems: {
-        metric,
-    },
+const each: Measure<EachSystems, EachUnits> = {
+  systems: {
+    metric,
+  },
 };
 
-export default measure;
+export default each;

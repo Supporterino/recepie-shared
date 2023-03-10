@@ -1,3 +1,3 @@
-export interface VersionResponse {
-    version: string;
-}
+export type VersionResponse = {
+  version: string,
+};

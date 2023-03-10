@@ -1,4 +1,4 @@
-export interface RatingInfo {
-    avgRating: number;
-    numOfRatings: number;
-}
+export type RatingInfo = {
+  avgRating: number,
+  numOfRatings: number,
+};

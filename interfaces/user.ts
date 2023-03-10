@@ -1,10 +1,12 @@
-import { Role } from '../enums';
+import {
+  type Role,
+} from '../enums';
 
-export interface User {
-    id: string;
-    username: string;
-    joinedAt: Date;
-    avatar: string;
-    role: Role;
-    verified: boolean;
-}
+export type User = {
+  avatar: string,
+  id: string,
+  joinedAt: Date,
+  role: Role,
+  username: string,
+  verified: boolean,
+};

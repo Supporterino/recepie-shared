@@ -1,7 +1,9 @@
-import { AllMeasuresUnits } from '../enums';
+import {
+  type AllMeasuresUnits,
+} from '../enums';
 
-export interface Ingredient {
-    name: string;
-    amount: number;
-    unit: AllMeasuresUnits;
-}
+export type Ingredient = {
+  amount: number,
+  name: string,
+  unit: AllMeasuresUnits,
+};
